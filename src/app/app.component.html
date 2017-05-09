@@ -1,7 +1,10 @@
-<h1>{{ item | async | json }}</h1>
-<input type="text" #newname placeholder="Name" />
-<input type="text" #newsize placeholder="Size" />
-<br />
-<button (click)="save(newname.value)">Set Name</button>
-<button (click)="update(newsize.value)">Update Size</button>
-<button (click)="delete()">Delete</button>
+<ul>
+  <li *ngFor="let item of items | async">
+    <input type="text" #updatetext [value]="item.text" />
+    <button (click)="updateItem(item.$key, updatetext.value)">Update</button>
+    <button (click)="deleteItem(item.$key)">Delete</button>
+  </li>
+</ul>
+<input type="text" #newitem />
+<button (click)="addItem(newitem.value)">Add</button>
+<button (click)="deleteEverything()">Delete All</button>

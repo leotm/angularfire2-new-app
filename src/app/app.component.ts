@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 
 @Component({
   selector: 'app-root',
@@ -7,21 +7,20 @@ import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/data
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-   item: FirebaseObjectObservable<any>;
-   constructor(db: AngularFireDatabase) {
-     this.item = db.object('/item', { preserveSnapshot: true });
-     this.item.subscribe(snapshot => {
-       console.log(snapshot.key)
-       console.log(snapshot.val())
-     });
-   }
-   save(newName: string) {
-     this.item.set({ name: newName });
-   }
-   update(newSize: string) {
-     this.item.update({ size: newSize });
-   }
-   delete() {
-     this.item.remove();
-   }
+  items: FirebaseListObservable<any>;
+  constructor(db: AngularFireDatabase) {
+    this.items = db.list('/items');
+  }
+  addItem(newName: string) {
+    this.items.push({ text: newName });
+  }
+  updateItem(key: string, newText: string) {
+    this.items.update(key, { text: newText });
+  }
+  deleteItem(key: string) {    
+    this.items.remove(key); 
+  }
+  deleteEverything() {
+    this.items.remove();
+  }
 }
