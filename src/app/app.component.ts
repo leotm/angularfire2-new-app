@@ -9,7 +9,11 @@ import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/data
 export class AppComponent {
    item: FirebaseObjectObservable<any>;
    constructor(db: AngularFireDatabase) {
-     this.item = db.object('/item');
+     this.item = db.object('/item', { preserveSnapshot: true });
+     this.item.subscribe(snapshot => {
+       console.log(snapshot.key)
+       console.log(snapshot.val())
+     });
    }
    save(newName: string) {
      this.item.set({ name: newName });
