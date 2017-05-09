@@ -7,6 +7,17 @@ import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/data
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+   item: FirebaseObjectObservable<any>;
    constructor(db: AngularFireDatabase) {
+     this.item = db.object('/item');
+   }
+   save(newName: string) {
+     this.item.set({ name: newName });
+   }
+   update(newSize: string) {
+     this.item.update({ size: newSize });
+   }
+   delete() {
+     this.item.remove();
    }
 }
