@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
-import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-root',
@@ -8,19 +9,20 @@ import { Subject } from 'rxjs/Subject';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  items: FirebaseListObservable<any[]>;
-  sizeSubject: Subject<any>;
+
+  user: Observable<firebase.User>;
   
-  constructor(db: AngularFireDatabase) {
-    this.sizeSubject = new Subject();
-    this.items = db.list('/items', {
-      query: {
-        orderByChild: 'size',
-        equalTo: this.sizeSubject
-      }
-    });
+  constructor(public afAuth: AngularFireAuth) {
+    this.user = afAuth.authState;
   }
-  filterBy(size: string) {
-    this.sizeSubject.next(size);
+
+  login() {
+    // this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    this.afAuth.auth.signInAnonymously();
   }
+
+  logout() {
+    this.afAuth.auth.signOut();
+  }
+  
 }

@@ -1,11 +1,3 @@
-<ul>
-  <li *ngFor="let item of items | async">
-    {{ item.text }}
-  </li>
-</ul>
-<div>
-  <h4>Filter by size</h4>
-  <button (click)="filterBy('small')">Small</button>
-  <button (click)="filterBy('medium')">Medium</button>
-  <button (click)="filterBy('large')">Large</button>
-</div>
+<div> {{ (user | async)?.uid }} </div>
+<button (click)="login()">Login</button>
+<button (click)="logout()">Logout</button>
