@@ -6,11 +6,11 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "AIzaSyBv6hAJQfO3reYKfN_sSRXDgOBWfppZEuU",
-    authDomain: "eatrics-app.firebaseapp.com",
-    databaseURL: "https://eatrics-app.firebaseio.com",
-    projectId: "eatrics-app",
-    storageBucket: "eatrics-app.appspot.com",
-    messagingSenderId: "168672857703"
+    apiKey: "AIzaSyDkM65Q5cm1qwgqTDkpBrsLKfgmsFtP2XA",
+    authDomain: "new-app-4cffd.firebaseapp.com",
+    databaseURL: "https://new-app-4cffd.firebaseio.com",
+    projectId: "new-app-4cffd",
+    storageBucket: "new-app-4cffd.appspot.com",
+    messagingSenderId: "144003221260"
   }
 };
