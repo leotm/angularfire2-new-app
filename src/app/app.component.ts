@@ -10,6 +10,14 @@ export class AppComponent {
   items: FirebaseListObservable<any>;
   constructor(db: AngularFireDatabase) {
     this.items = db.list('/items');
+    const queryObservable = db.list('/items', {
+      query: {
+        orderByChild: 'text'
+      }
+    });
+    queryObservable.subscribe(queriedItems => {
+      console.log(queriedItems);
+    })
   }
   addItem(newName: string) {
     this.items.push({ text: newName });
